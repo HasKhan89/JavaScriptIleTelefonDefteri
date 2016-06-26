@@ -1,0 +1,65 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        input[type=text] {
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        body {
+            padding: 20px;
+        }
+
+        #manage {
+            padding-left: 15px;
+        }
+    </style>
+
+    <script>
+
+        function sayfa_yuklenince() {
+
+            for (var i = 0; i < 10; i++) {
+
+                // <p>paragraf elementi</p>
+                var yeni_element = document.createElement("p"); // createElement : element oluşturma
+                yeni_element.innerHTML = "paragraf elementi"; // innerHTML : element içine ekleme.
+
+                // class="btn btn-primary"
+                yeni_element.setAttribute("class", "btn btn-primary");
+                // <p class="btn btn-primary">paragraf elementi</p>
+
+                var k = document.getElementById("kutu"); // getElementById : id'si ile element getir.
+                k.appendChild(yeni_element); // appendChild : bir element'e element ekleme..
+
+                yeni_element.setAttribute("contenteditable", "true");
+            }
+
+        }
+
+       
+
+    </script>
+
+
+</head>
+<body onload="sayfa_yuklenince();">
+    <div class="container">
+        <div id="kutu">
+
+        </div>
+    </div>
+</body>
+</html>

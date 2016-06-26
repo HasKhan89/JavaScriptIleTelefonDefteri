@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Basit Örnek</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <script>
+
+        var p;          // undefined
+        var p = null;   // null
+
+        if(p != null || p != "undefined")
+        {
+            // Kodlar..
+        }
+
+
+
+
+        function paragrafEkle() {
+
+            var pList = document.getElementById("paragraflar");
+
+            var p = document.createElement("p");
+            p.innerHTML = "Bu bir paragraftır.";
+
+            pList.appendChild(p);
+
+        }
+
+        function butonEkle()
+        {
+            var b = document.createElement("input");
+            b.setAttribute("type", "button");           // <input type="button" />
+            b.setAttribute("value", "Tıkla");           // <input type="button" value="Tıkla" />
+            b.setAttribute("class", "btn btn-success"); // <input type="button" value="Tıkla" class="btn btn-success" />
+            //b.setAttribute("onclick", "alert('Merhaba moto!');");
+            b.setAttribute("onclick", "paragrafEkle();");
+
+            paragraflar.appendChild(b);
+        }
+
+        function textboxEkle() {
+
+            var t = document.createElement("input");
+            t.setAttribute("type", "text");
+            t.setAttribute("class", "form-control");
+            t.setAttribute("placeholder", "Adınız");
+
+            paragraflar.appendChild(t);
+
+        }
+
+    </script>
+
+
+</head>
+<body>
+    <div>
+        <p>
+            Buton'a tıklayınca element ekleme.
+        </p>
+        <p>
+            <input type="button" class="btn btn-primary" id="btnElementEkle" value="Element Ekle" onclick="paragrafEkle();" />
+        </p>
+
+        <p>
+            Buton' a tıklayınca button ekleme.
+        </p>
+        <p>
+            <input type="button" class="btn btn-warning" id="btnButtonEkle" value="Button Ekle" onclick="butonEkle();" />
+        </p>
+
+        <p>
+            Buton'a tıklayınca textbox ekleme..
+        </p>
+        <p>
+            <input type="button" class="btn btn-info" id="btnTextboxEkle" value="Textbox Ekle" onclick="textboxEkle();" />
+        </p>
+    </div>
+
+    <div id="paragraflar">
+        
+    </div>
+</body>
+</html>

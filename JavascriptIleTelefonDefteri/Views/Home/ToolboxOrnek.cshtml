@@ -1,0 +1,242 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ToolboxOrnek</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        input[type=button] {
+            margin-bottom: 10px;
+        }
+
+        body {
+            padding: 10px;
+        }
+
+        .resim {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        img.resim {
+            transition: all 0.5s;
+        }
+
+            img.resim:hover {
+                box-shadow: 0 0 10px #f00; /* x y bulaniklik renk */
+                transform: scaleX(1.1) scaleY(1.1);
+            }
+
+        .list-group-item {
+            transition: all 0.5s;
+        }
+
+            .list-group-item:hover {
+                background-color: #ff9d58;
+                box-shadow: 0 0 10px #e05d00;
+            }
+    </style>
+
+    <script>
+
+        function sayfa_yuklendi() {
+            btnBoldEkle.onclick = btnBoldEkle_Click;
+            btnItalikEkle.onclick = btnItalikEkle_Click;
+            btnAltiCiziliEkle.onclick = btnAltiCiziliEkle_Click;
+            btnResimEkle.onclick = btnResimEkle_Click;
+            btnParagrafEkle.onclick = btnParagrafEkle_Click;
+            btnSirasizListeEkle.onclick = btnSirasizListeEkle_Click;
+            btnDugmeEkle.onclick = btnDugmeEkle_Click;
+            txtTextEkle.onclick = txtTextEkle_Click;
+            txtPasswordEkle.onclick = txtPasswordEkle_Click;
+            btnStrongEkle.onclick = btnStrongEkle_Click;
+            btnTableEkle.onclick = btnTableEkle_Click;
+            btnBrEkle.onclick = btnBrEkle_Click;
+            btnHrEkle.onclick = btnHrEkle_Click;
+            btnSpanEkle.onclick = btnSpanEkle_Click;
+        }
+
+        function btnDugmeEkle_Click() {
+            var b = document.createElement("input");
+            b.setAttribute("class", "btn btn-success");
+            b.setAttribute("type", "button");
+            b.setAttribute("value", "Düğme");
+
+            content.appendChild(b);
+        }
+
+        function btnBoldEkle_Click() {
+            var b = document.createElement("b");
+            b.innerHTML = "Bu bir bold elementidir.";
+
+            content.appendChild(b);
+        }
+
+        function btnItalikEkle_Click() {
+            var i = document.createElement("i");
+            i.innerHTML = "Bu bir italik elementidir.";
+
+            content.appendChild(i);
+        }
+
+        function btnAltiCiziliEkle_Click() {
+            var u = document.createElement("u");
+            u.innerHTML = "Bu bir altı çizili elementdir.";
+
+            content.appendChild(u);
+        }
+
+        function btnResimEkle_Click() {
+            var img = document.createElement("img");
+            img.setAttribute("src", "/images/resim.jpg");
+            img.setAttribute("width", "150");
+            img.setAttribute("height", "150");
+            img.setAttribute("class", "img-responsive img-thumbnail resim");
+
+            content.appendChild(img);
+        }
+
+        function btnParagrafEkle_Click() {
+            var p = document.createElement("p");
+            p.setAttribute("contenteditable", "true");
+            p.innerHTML = "Ipsum gravida vel pretium tellus tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut.";
+
+            content.appendChild(p);
+        }
+
+        function btnSirasizListeEkle_Click() {
+            var ul = document.createElement("ul");
+            ul.setAttribute("class", "list-group");
+
+            for (var i = 0; i < 3; i++) {
+                var li = document.createElement("li");
+                li.setAttribute("class", "list-group-item");
+                li.setAttribute("contenteditable", "true");
+                li.innerHTML = "Seçenek-" + i;
+
+                ul.appendChild(li);
+            }
+
+            content.appendChild(ul);
+        }
+
+        function txtTextEkle_Click() {
+            var txt = document.createElement("input");
+
+            txt.setAttribute("class", "text-warning");
+            txt.setAttribute("type", "text");
+            txt.setAttribute("value", "Text");
+
+            content.appendChild(txt);
+        }
+
+        function txtPasswordEkle_Click() {
+            var pass = document.createElement("input");
+
+            pass.setAttribute("class", "text-warning");
+            pass.setAttribute("type", "password");
+            pass.setAttribute("value", "Password");
+
+            content.appendChild(pass);
+        }
+
+        function btnStrongEkle_Click() {
+            var strong = document.createElement("strong");
+
+            strong.innerHTML = "Bu bir strong yazıdır.";
+
+            content.appendChild(strong);
+        }
+        function btnTableEkle_Click() {
+            var table = document.createElement("table");
+            table.setAttribute("border", "1");
+
+            for (var i = 0; i < 3; i++) {
+
+                var tr = document.createElement("tr");
+
+                for (var i = 0; i < 3; i++) {
+                    var td = document.createElement("td");
+                    td.innerHTML = "Bu Bir Sutundur."
+
+                    table.appendChild(td);
+                    
+            
+                }
+                for (var i = 0; i < 3; i++) {
+                    tr.innerHTML = "Bu Bir satırdır."
+
+                    table.appendChild(tr);
+            }
+
+               
+                
+            }
+
+            content.appendChild(table);
+        }
+
+        function btnBrEkle_Click() {
+            var br = document.createElement("br");
+            
+
+            content.appendChild(br);
+
+        }
+        function btnHrEkle_Click() {
+            var hr = document.createElement("hr");
+            
+
+            content.appendChild(hr);
+
+        }
+
+        function btnSpanEkle_Click() {
+            var span = document.createElement("span");
+
+            span.innerHTML = "Bu bir span elemntidir.";
+
+            content.appendChild(span);
+        }
+        
+         
+    </script>
+
+</head>
+<body onload="sayfa_yuklendi();">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-2">
+                <input type="button" id="btnBoldEkle" value="Bold Ekle" class="btn btn-primary" />
+                <input type="button" id="btnItalikEkle" value="İtalik Ekle" class="btn btn-primary" />
+                <input type="button" id="btnAltiCiziliEkle" value="Altı Çizili" class="btn btn-primary" />
+                <input type="button" id="btnResimEkle" value="Resim Ekle" class="btn btn-primary" />
+                <input type="button" id="btnParagrafEkle" value="Paragraf Ekle" class="btn btn-primary" />
+                <input type="button" id="btnSirasizListeEkle" value="Sırasız Liste Ekle" class="btn btn-primary" />
+                <input type="button" id="btnDugmeEkle" value="Düğme Ekle" class="btn btn-primary" />
+                <input type="button" id="txtTextEkle" value="Text Ekle" class="btn btn-primary" />
+                <input type="button" id="txtPasswordEkle" value="Password Ekle" class="btn btn-primary" />
+                <input type="button" id="btnStrongEkle" value="Strong Ekle" class="btn btn-primary" />
+                <input type="button" id="btnTableEkle" value="Table Ekle" class="btn btn-primary" />
+                <input type="button" id="btnBrEkle" value="Br Ekle" class="btn btn-primary" />
+                <input type="button" id="btnHrEkle" value="Hr Ekle" class="btn btn-primary" />
+                <input type="button" id="btnSpanEkle" value="Span Ekle" class="btn btn-primary" />
+            </div>
+            <div class="col-md-10">
+                <div id="content"></div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

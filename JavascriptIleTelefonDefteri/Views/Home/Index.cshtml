@@ -1,0 +1,260 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        input[type=text] {
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        body {
+            padding: 20px;
+        }
+
+        #manage {
+            padding-left: 15px;
+        }
+    </style>
+
+    <script>
+
+        var people = [];
+        var counter = 0;
+
+        function onloaded() {
+            btnSave.style.visibility = "hidden";
+
+            btnAdd.onclick = addPerson; // event e metot atanır. Metot çağırılmaz!!!
+            btnClearAll.onclick = clearAllPeople; // event e metot atanır. Metot çağırılmaz!!!
+        }
+
+        function addPerson() {
+            var name = document.getElementById("txtName").value;
+            var surname = document.getElementById("txtSurname").value;
+            var phone = document.getElementById("txtPhoneNumber").value;
+
+            counter++;
+
+            var person = { id: counter, pname: name, psurname: surname, pphone: phone };
+
+            people.push(person);
+
+            listPeople();
+        }
+
+        function editPerson(id)
+        {
+            btnAdd.style.visibility = "hidden";
+            btnSave.style.visibility = "visible";
+
+            var person = null;
+            
+            for (var i = 0; i < people.length; i++) {
+                var p = people[i];
+
+                if(p.id == id)
+                {
+                    person = p;
+                    break;  // dönmeye daha gerek yok..
+                }
+            }
+
+            txtName.value = p.pname;
+            txtSurname.value = p.psurname;
+            txtPhoneNumber.value = p.pphone;
+
+            attr(btnSave, "item-index", p.id);
+            attr(btnSave, "onclick", "savePerson(" + p.id + ");");
+        }
+
+        function deletePerson(id)
+        {
+            btnAdd.style.visibility = "visible";
+            btnSave.style.visibility = "hidden";
+
+            var people2 = [];
+            
+            for (var i = 0; i < people.length; i++) {
+                var person = people[i];
+
+                if(person.id != id)
+                {
+                    people2.push(person);
+                }
+            }
+
+            people = people2;
+
+            listPeople();
+        }
+
+        function savePerson(id)
+        {
+            btnAdd.style.visibility = "visible";
+            btnSave.style.visibility = "hidden";
+
+            for (var i = 0; i < people.length; i++) {
+                var person = people[i];
+
+                if (person.id == id)
+                {
+                    person.pname = txtName.value;
+                    person.psurname = txtSurname.value;
+                    person.pphone = txtPhoneNumber.value;
+                    break;  // dönmeye gerek yok..
+                }
+            }
+
+            listPeople();
+        }
+
+        function listPeople() {
+
+            datalist.innerHTML = "";
+
+            for (var i = 0; i < people.length; i++) {
+
+                var person = people[i];
+
+                var li = create("li");
+                attr(li, "class", "list-group-item");
+
+                var div = create("div");
+                attr(div, "class", "row");
+
+                var div1 = create("div");
+                attr(div1, "class", "col-md-1");
+
+                var div2 = create("div");
+                attr(div2, "class", "col-md-1");
+
+                var div3 = create("div");
+                attr(div3, "class", "col-md-6");
+
+                var bDel = create("input");
+                attr(bDel, "class", "btn btn-danger");
+                attr(bDel, "type", "button");
+                attr(bDel, "value", "Delete");
+                attr(bDel, "item-index", person.id);
+                attr(bDel, "onclick", "deletePerson(" + person.id + ");");
+
+                var bEdit = create("input");
+                attr(bEdit, "class", "btn btn-warning");
+                attr(bEdit, "type", "button");
+                attr(bEdit, "value", "Edit");
+                attr(bEdit, "item-index", person.id);
+                attr(bEdit, "onclick", "editPerson(" + person.id + ");");
+
+                var span = create("span");
+                span.innerHTML = person.pname + " " + person.psurname + " - " + person.pphone;
+
+                div1.appendChild(bDel);
+                div2.appendChild(bEdit);
+                div3.appendChild(span);
+
+                div.appendChild(div1);
+                div.appendChild(div2);
+                div.appendChild(div3);
+
+                li.appendChild(div);
+
+                datalist.appendChild(li);
+            }
+
+        }
+
+        function clearAllPeople() {
+            people = [];
+
+            listPeople();
+        }
+
+
+
+        // Element'den attribute okuyacak ya da attribute set edecek.
+        function attr(element, name, value)
+        {
+            if(value == "undefined" || value == null) {
+                return element.getAttribute(name);
+            }
+            else {
+                element.setAttribute(name, value);
+            }
+        }
+
+        // Verilen tag ismine göre element döndürür.
+        function create(tagname) {
+            return document.createElement(tagname);
+        }
+
+    </script>
+
+
+</head>
+<body onload="onloaded();">
+    <div class="container">
+
+        <div id="manage" class="row">
+
+            <input type="text" class="form-control col-xs-4" id="txtName" placeholder="Name" />
+            <input type="text" class="form-control col-xs-4" id="txtSurname" placeholder="Surname" />
+            <input type="text" class="form-control col-xs-4" id="txtPhoneNumber" placeholder="Phone Number" />
+
+            <input type="button" class="btn btn-primary" id="btnAdd" value="Add" />
+            <input type="button" class="btn btn-success" id="btnSave" value="Save" />
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr />
+            </div>
+        </div>
+
+        <div id="list" class="row">
+            <div class="col-md-12">
+                <input type="button" class="btn btn-danger" id="btnClearAll" value="Clear" />
+                <br /><br />
+            </div>
+
+            <div class="col-md-10">
+
+                <ul id="datalist" class="list-group">
+
+                    <li class="list-group-item">
+                        <div class="row">
+
+                            <div class="col-md-1">
+                                <input class="btn btn-danger" type="button" value="Delete" />
+                            </div>
+
+                            <div class="col-md-1">
+                                <input class="btn btn-warning" type="button" value="Edit" />
+                            </div>
+
+                            <div class="col-md-6">
+                               Hasan Kahraman - 5558889922
+                            </div>
+
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
